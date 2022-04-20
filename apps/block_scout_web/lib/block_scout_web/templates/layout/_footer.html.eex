@@ -1,0 +1,50 @@
+<footer class="footer">
+  <div class="footer-body container">
+    <!-- Logo -->
+    <div class="row footer-logo-row">
+      <div class="col-md-12">
+        <%= link to: webapp_url(@conn), class: "footer-brand" do %>
+          <%= if logo_footer() do %>
+            <img class="footer-logo" src="<%= static_path(@conn, logo_footer()) %>" alt="<%= subnetwork_title() %>" />
+          <% end %>
+          <%= if logo_text() do %>
+            <span class="logo-text in-footer <%= unless logo_footer(), do: "no-logo" %>"> <%= logo_text() %> </span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <% other_explorers = other_explorers() %>
+    <% col_size = if Enum.empty?(other_explorers), do: 3, else: 2 %>
+
+    <div class="row">
+      <div class="col-xs-12 col-lg-3">
+        <p class="footer-info-text"><%= gettext("Star Social & Enterprise Chain Explorer is a tool for inspecting and analyzing on-chain data. This website is for demo purpose.") %></p>
+        <div class="footer-social-icons">
+
+          <a href="https://twitter.com/asterProtocol" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Twitter") %>'>
+            <div class="footer-social-icon-container fontawesome-icon twitter"></div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="https://aster.so/" rel="noreferrer" class="footer-link" target="_blank"><%= gettext("Aster Protocol") %></a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <% version = version() %>
+
+    <%= unless ignore_version?(version) do %>
+      <% release_link = release_link(version) %>
+      <div>
+        <%= gettext("Version") %>: <%= 1.0 %>
+      </div>
+    <% end %>
+  </div>
+</footer>
